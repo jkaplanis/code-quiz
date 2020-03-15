@@ -15,6 +15,22 @@ var ans1 = document.createElement("button");
 var ans2 = document.createElement("button");
 var ans3 = document.createElement("button");
 var ans4 = document.createElement("button");
+var ans1_2 = document.createElement("button");
+var ans2_2 = document.createElement("button");
+var ans3_2 = document.createElement("button");
+var ans4_2 = document.createElement("button");
+var ans1_3 = document.createElement("button");
+var ans2_3 = document.createElement("button");
+var ans3_3 = document.createElement("button");
+var ans4_3 = document.createElement("button");
+var ans1_4 = document.createElement("button");
+var ans2_4 = document.createElement("button");
+var ans3_4 = document.createElement("button");
+var ans4_4 = document.createElement("button");
+var ans1_5 = document.createElement("button");
+var ans2_5 = document.createElement("button");
+var ans3_5 = document.createElement("button");
+var ans4_5 = document.createElement("button");
 // **The below should be in a function that is called at the beginning of this js file. 
 // When the page is loaded, the h1 element should be populated with the title and the p element should have the description. 
 // a button should be created (createElement and appendChild) that has the start button
@@ -22,8 +38,8 @@ var ans4 = document.createElement("button");
 // When the start button is clicked 
 // Create an addEventLister "click" on a variable holding my play button element
 startQuiz.addEventListener("click", function () {
+    event.stopPropagation();
     question1();
-
 });
 
 // This is the correct function
@@ -38,6 +54,7 @@ function correct() {
         correctAnswer.parentNode.removeChild(correctAnswer);
         clearInterval(displayCorrect);
     }, 2000);
+    console.log(score);
 }
 
 // This is the incorrect function
@@ -71,35 +88,154 @@ function question1() {
     ans3.textContent = "answer 3 wrong";
     ans4.textContent = "answer 4 wrong";
     // check to see if they clicked the correct or incorrect answer
-    ans1.addEventListener("click", function (event) {
-        if (event) {
-            // question2();
-            incorrect();
-        }
-    });
-    ans2.addEventListener("click", function (event) {
-        if (event) {
-            // question2();
+    
+    buttonWrapper.addEventListener("click", function () {
+        if (ans2) {
+            question2();
             correct();
         }
-    });
-    ans3.addEventListener("click", function (event) {
-        if (event) {
-            // question2();
+        else if (ans1 || ans3 || ans4){
+            question2();
             incorrect();
         }
     });
-    ans4.addEventListener("click", function (event) {
-        if (event) {
-            // question2();
-            incorrect();
-        }
-    });
+    return;
 };
 
 // When a question is answered
 // Then another question is presented
+function question2() {
+    // content for question
+    h1El.textContent = "This is question 2?";
+    // remove question 1 buttons
+    ans1.parentNode.removeChild(ans1);
+    ans2.parentNode.removeChild(ans2);
+    ans3.parentNode.removeChild(ans3);
+    ans4.parentNode.removeChild(ans4);
+    // add answer buttons
+    buttonWrapper.appendChild(ans1_2);
+    buttonWrapper.appendChild(ans2_2);
+    buttonWrapper.appendChild(ans3_2);
+    buttonWrapper.appendChild(ans4_2);
+    // add content to answer buttons
+    ans1_2.textContent = "answer 1 wrong";
+    ans2_2.textContent = "answer 2 wrong";
+    ans3_2.textContent = "answer 3 wrong";
+    ans4_2.textContent = "answer 4 correct";
+    // check to see if they clicked the correct or incorrect answer
+    buttonWrapper.addEventListener("click", function () {
+        if (ans4_2) {
+            question3();
+            correct();
+        }
+        else if (ans1_2 || ans2_2 || ans3_2){
+            question3();
+            incorrect();
+        }
+    });
+    return;
+};
 
+// question 3
+function question3() {
+    // content for question
+    h1El.textContent = "This is question 3?";
+    // remove question 1 buttons
+    ans1_2.parentNode.removeChild(ans1_2);
+    ans2_2.parentNode.removeChild(ans2_2);
+    ans3_2.parentNode.removeChild(ans3_2);
+    ans4_2.parentNode.removeChild(ans4_2);
+    // add answer buttons
+    buttonWrapper.appendChild(ans1_3);
+    buttonWrapper.appendChild(ans2_3);
+    buttonWrapper.appendChild(ans3_3);
+    buttonWrapper.appendChild(ans4_3);
+    // add content to answer buttons
+    ans1_3.textContent = "answer 1 correct";
+    ans2_3.textContent = "answer 2 wrong";
+    ans3_3.textContent = "answer 3 wrong";
+    ans4_3.textContent = "answer 4 wrong";
+    // check to see if they clicked the correct or incorrect answer
+    buttonWrapper.addEventListener("click", function () {
+        if (ans1_3) {
+            question4();
+            correct();
+        }
+        else if (ans2_3 || ans3_3 || ans4_3){
+            question4();
+            incorrect();
+        }
+    });
+    return;
+};
+// question 4
+function question4() {
+    // content for question
+    h1El.textContent = "This is question 4?";
+    // remove question 1 buttons
+    ans1_3.parentNode.removeChild(ans1_3);
+    ans2_3.parentNode.removeChild(ans2_3);
+    ans3_3.parentNode.removeChild(ans3_3);
+    ans4_3.parentNode.removeChild(ans4_3);
+    // add answer buttons
+    buttonWrapper.appendChild(ans1_4);
+    buttonWrapper.appendChild(ans2_4);
+    buttonWrapper.appendChild(ans3_4);
+    buttonWrapper.appendChild(ans4_4);
+    // add content to answer buttons
+    ans1_4.textContent = "answer 1 correct";
+    ans2_4.textContent = "answer 2 wrong";
+    ans3_4.textContent = "answer 3 wrong";
+    ans4_4.textContent = "answer 4 wrong";
+    // check to see if they clicked the correct or incorrect answer
+    buttonWrapper.addEventListener("click", function () {
+        if (ans1_4) {
+            question5();
+            correct();
+        }
+        else if (ans2_4 || ans3_4 || ans4_4){
+            question5();
+            incorrect();
+        }
+    });
+    return;
+};
+
+// question 5
+function question5() {
+    // content for question
+    h1El.textContent = "This is question 5?";
+    // remove question 1 buttons
+    ans1_4.parentNode.removeChild(ans1_4);
+    ans2_4.parentNode.removeChild(ans2_4);
+    ans3_4.parentNode.removeChild(ans3_4);
+    ans4_4.parentNode.removeChild(ans4_4);
+    // add answer buttons
+    buttonWrapper.appendChild(ans1_5);
+    buttonWrapper.appendChild(ans2_5);
+    buttonWrapper.appendChild(ans3_5);
+    buttonWrapper.appendChild(ans4_5);
+    // add content to answer buttons
+    ans1_5.textContent = "answer 1 wrong";
+    ans2_5.textContent = "answer 2 correct";
+    ans3_5.textContent = "answer 3 wrong";
+    ans4_5.textContent = "answer 4 wrong";
+    // check to see if they clicked the correct or incorrect answer
+    buttonWrapper.addEventListener("click", function () {
+        if (ans2_5) {
+            // question2();
+            correct();
+        }
+        else if (ans1_5 || ans3_5 || ans4_5){
+            incorrect();
+        }
+    });
+    return;
+};
+
+function allDone(){
+
+}
 // When a question is answered incorrectly
 // Then a 10second penalty is applied, meaning the timer should sudenly jump but 10 more seconds
 
