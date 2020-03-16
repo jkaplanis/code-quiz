@@ -10,6 +10,24 @@ var correctAnswer;
 var incorrectAnswer;
 var score = 0;
 
+// var questionArray = [
+//     [0, "The question", "Answer1", "Answer3"...]
+// ]
+
+// var questionArray = [
+//     {
+//         answer: 0,
+//         question: 'What is something',
+//         answers: ['answer1', 'answer2', 'answer3', 'answer4']
+//     },
+//     {}
+
+    // Loop through answers and make an element
+    // Each answer element will have a data attribute equal to its attay position data-index="0"
+    // append element to the screen
+    // When answer is clicked if data-index === answer then it is correct else its wrong
+// ]
+
 // These are the buttons for the quiz
 var ans1 = document.createElement("button");
 var ans2 = document.createElement("button");
@@ -108,10 +126,10 @@ function question2() {
     // content for question
     h1El.textContent = "This is question 2?";
     // remove question 1 buttons
-    ans1.parentNode.removeChild(ans1);
-    ans2.parentNode.removeChild(ans2);
-    ans3.parentNode.removeChild(ans3);
-    ans4.parentNode.removeChild(ans4);
+    buttonWrapper.removeChild(ans1);
+    buttonWrapper.removeChild(ans2);
+    buttonWrapper.removeChild(ans3);
+    buttonWrapper.removeChild(ans4);
     // add answer buttons
     buttonWrapper.appendChild(ans1_2);
     buttonWrapper.appendChild(ans2_2);
