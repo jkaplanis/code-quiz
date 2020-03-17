@@ -92,7 +92,6 @@ function clearChoices() {
 }
 
 var submit = document.querySelector("#submit");
-submit.setAttribute("href", "./highscores.html");
 var initialsInput = document.querySelector("#initials");
 
 // This function sets up the final score screen and input field where the user can 
@@ -107,11 +106,12 @@ function allDone(){
     var initialsForm = document.querySelector(".input-group");
     initialsForm.setAttribute("class", "input-group");
 }
+localStorage.setItem("score", JSON.stringify(score));
 // when submit is clicked, the input is saved in local storage. 
 submit.addEventListener("click", function(event){
     var initials = initialsInput.value.trim();
     event.preventDefault();
     localStorage.setItem("initials", JSON.stringify(initials));
-
-
+   
 })
+
