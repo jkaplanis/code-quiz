@@ -29,7 +29,28 @@ var questionsArray = [
     }
 ];
 
+// timer
 
+var timerEl = document.querySelector("#timer");
+
+var timer = 75;
+
+function setTime() {
+    var timerInterval = setInterval(function() {
+        timer--;
+        timerEl.textContent = "Time: " + timer;
+        if(timer === 0) {
+            clearInterval(timerInterval);
+            clearChoices();
+            allDone();
+        }
+        if (allDone){
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
+
+// start quiz
 var startQuiz = document.querySelector("#start-quiz");
 
 startQuiz.addEventListener("click", function () {
@@ -37,6 +58,7 @@ startQuiz.addEventListener("click", function () {
     var startWrapper = document.querySelector("#start-wrapper");
     startWrapper.innerHTML = "";
     questionSetUp();
+    setTime();
 });
 
 
@@ -59,6 +81,7 @@ function questionSetUp() {
         };
     }
     else {
+        score = score + timer;
         allDone();
     }
 }
@@ -67,18 +90,19 @@ function questionSetUp() {
 choiceButtons.addEventListener("click", function (event) {
 
     if (parseInt(event.target.getAttribute("data-index")) === questionsArray[currentQuestion].answer) {
-        alert("correct");
-        score += 1;
+        // alert("correct");
+        score += 10;
         clearChoices();
         currentQuestion += 1;
         questionSetUp();
 
     }
     else {
-        alert("incorrect");
+        // alert("incorrect");
         clearChoices();
         currentQuestion += 1;
         questionSetUp();
+        timer -= 10;
     }
 });
 
@@ -100,18 +124,24 @@ function allDone(){
     questionEl.textContent = "All Done!";
     
     var yourScore = document.createElement("p");
-    yourScore.textContent = ("Your final score is " + score);
+    yourScore.textContent = ("Your final score is " + score + " points!");
     questionEl.appendChild(yourScore);
     
     var initialsForm = document.querySelector(".input-group");
     initialsForm.setAttribute("class", "input-group");
 }
-localStorage.setItem("score", JSON.stringify(score));
+
 // when submit is clicked, the input is saved in local storage. 
+var highscoreList = JSON.parse(localStorage.getItem("highscoreList"));
+if (highscoreList === null) {
+    highscoreList = [];
+}
+
 submit.addEventListener("click", function(event){
-    var initials = initialsInput.value.trim();
     event.preventDefault();
-    localStorage.setItem("initials", JSON.stringify(initials));
-   
+    var newItem = initialsInput.value.trim();
+    highscoreList.push(newItem + "-" + score);
+    localStorage.setItem("highscoreList", JSON.stringify(highscoreList));
+    document.location.href = "./highscores.html";
 })
 
