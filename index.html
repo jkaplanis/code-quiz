@@ -17,38 +17,43 @@
 <body>
 
     <main class="container">
+        
         <div class="row">
             <div class="col-6">
-                <a class="d-flex justify-content-start" href="#">View Highscores</a>
+                <a class="d-flex justify-content-start" href="./highscores.html">View Highscores</a>
             </div>
             <div class="col 6">
                 <p id="timer" class="d-flex justify-content-end">Time: </p>
             </div>
         </div>
         <div id="start-wrapper" class="row">
-            <div  class="col-4 mx-auto my-3">
+            <div class="col-md-6 mx-auto my-3">
                 <h1 id="main-text">Code Quiz</h1>
-                <p id="subtext">This is a is a timed quiz to test your javascript knowledge. Click start to begin the quiz.</p>
+                <p id="subtext">This is a is a timed quiz to test your javascript knowledge. Each correct answer is
+                    worth 10 points. For each incorrect answer you will lose 10 seconds. If you finish before the time
+                    runs out, the remaining seconds will be added to your score.</p>
                 <div id="button-div" class="btn-group-vertical">
-                    <button id="start-quiz">Start Quiz</button>                    
+                    <button id="start-quiz">Start Quiz</button>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div id="quiz-wrapper" class="col-4 mx-auto my-3">
+            <div id="quiz-wrapper" class="col-md-6 mx-auto my-3">
                 <h1 id="quiz-question"></h1>
-                <div id="button-wrapper" class="btn-group-vertical">                  
+                <div id="button-wrapper" class="btn-group-vertical">
                 </div>
+                <p id="correct-incorrect"></p>
             </div>
         </div>
 
         <div class="input-group mb-3 d-none">
-            <input id= "initials" type="text" class="form-control" placeholder="Enter your initials" aria-label="intitials" aria-describedby="button-addon2">
+            <input id="initials" type="text" class="form-control" placeholder="Enter your initials"
+                aria-label="intitials" aria-describedby="button-addon2">
             <div class="input-group-append">
-              <button id= "submit" class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+                <button id="submit" class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
             </div>
-          </div>
+        </div>
     </main>
 
 

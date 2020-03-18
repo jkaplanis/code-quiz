@@ -3,29 +3,39 @@ var score = 0;
 
 var questionsArray = [
     {
-        question: "This is the first question",
-        choices: ["choice 1", "choice 2 correct", "choice 3", "choice 4"],
+        question: "Which of the following represents a boolean?",
+        choices: ["63", "False", "null", "string"],
         answer: 1
     },
     {
-        question: "This is the second question",
-        choices: ["choice 1 correct", "choice 2", "choice 3", "choice 4"],
+        question: 'What does "===" mean?',
+        choices: ["Strictly equal", "Not equal", "Less than", "Greater than"],
         answer: 0
     },
     {
-        question: "This is the third question",
-        choices: ["choice 1", "choice 2", "choice 3", "choice 4 correct"],
+        question: "JavScript and Java are the same.",
+        choices: ["True", "False"],
+        answer: 1
+    },
+    {
+        question: "Is JavaScript dynamically typed or Statically typed.",
+        choices: ["Dynamically", "Statically"],
+        answer: 0
+    },
+    {
+        question: "What does var do?",
+        choices: ["Prompts the user", "Alerts the user", "Calls a function", "Declares a variable"],
         answer: 3
     },
     {
-        question: "This is the fourth question",
-        choices: ["choice 1", "choice 2", "choice 3", "choice 4 correct"],
-        answer: 3
-    },
-    {
-        question: "This is the fifth question",
-        choices: ["choice 1", "choice 2", "choice 3 correct", "choice 4"],
+        question: "What does Confirm return?",
+        choices: ["Array", "Number", "Boolean", "String"],
         answer: 2
+    },
+    {
+        question: "How do you add items to the end of an array?",
+        choices: ["push()", "pop()", "shift()", "+"],
+        answer: 0
     }
 ];
 
@@ -36,15 +46,15 @@ var timerEl = document.querySelector("#timer");
 var timer = 75;
 
 function setTime() {
-    var timerInterval = setInterval(function() {
+    var timerInterval = setInterval(function () {
         timer--;
         timerEl.textContent = "Time: " + timer;
-        if(timer === 0) {
+        if (timer === 0) {
             clearInterval(timerInterval);
             clearChoices();
             allDone();
         }
-        if (allDone){
+        if (currentQuestion >= (questionsArray.length - 1)){
             clearInterval(timerInterval);
         }
     }, 1000);
@@ -68,8 +78,9 @@ var choiceButtons = document.querySelector("#button-wrapper");
 
 var choicesArray = [];
 
+// set up each qeuestion
 function questionSetUp() {
-    if (currentQuestion <= (questionsArray.length -1)){
+    if (currentQuestion <= (questionsArray.length - 1)) {
 
         questionEl.textContent = questionsArray[currentQuestion].question;
         for (var i = 0; i < questionsArray[currentQuestion].choices.length; i++) {
@@ -85,24 +96,31 @@ function questionSetUp() {
         allDone();
     }
 }
-
+var answerFeedback = document.querySelector("#correct-incorrect");
 // if the button's data-index is === to answer then the its correct, else its incorrect 
 choiceButtons.addEventListener("click", function (event) {
 
     if (parseInt(event.target.getAttribute("data-index")) === questionsArray[currentQuestion].answer) {
-        // alert("correct");
         score += 10;
         clearChoices();
         currentQuestion += 1;
         questionSetUp();
-
+        answerFeedback.textContent = "Correct! +10 points!";
+        var feedbackDisplay = setInterval(function () {
+            answerFeedback.textContent = "";
+            clearInterval(feedbackDisplay);
+        }, 1500);
     }
     else {
-        // alert("incorrect");
         clearChoices();
         currentQuestion += 1;
         questionSetUp();
         timer -= 10;
+        answerFeedback.textContent = "Incorrect! -10 seconds!";
+        var feedbackDisplay = setInterval(function () {
+            answerFeedback.textContent = "";
+            clearInterval(feedbackDisplay);
+        }, 1500);
     }
 });
 
@@ -120,13 +138,12 @@ var initialsInput = document.querySelector("#initials");
 
 // This function sets up the final score screen and input field where the user can 
 // input their intitials
-function allDone(){
+function allDone() {
     questionEl.textContent = "All Done!";
-    
     var yourScore = document.createElement("p");
     yourScore.textContent = ("Your final score is " + score + " points!");
     questionEl.appendChild(yourScore);
-    
+
     var initialsForm = document.querySelector(".input-group");
     initialsForm.setAttribute("class", "input-group");
 }
@@ -137,7 +154,7 @@ if (highscoreList === null) {
     highscoreList = [];
 }
 
-submit.addEventListener("click", function(event){
+submit.addEventListener("click", function (event) {
     event.preventDefault();
     var newItem = initialsInput.value.trim();
     highscoreList.push(newItem + "-" + score);
