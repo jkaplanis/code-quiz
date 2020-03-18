@@ -1,6 +1,7 @@
 var currentQuestion = 0;
 var score = 0;
 
+// Questions, choices, and answers
 var questionsArray = [
     {
         question: "Which of the following represents a boolean?",
@@ -40,9 +41,7 @@ var questionsArray = [
 ];
 
 // timer
-
 var timerEl = document.querySelector("#timer");
-
 var timer = 75;
 
 function setTime() {
@@ -54,13 +53,13 @@ function setTime() {
             clearChoices();
             allDone();
         }
-        if (currentQuestion >= (questionsArray.length - 1)){
+        if (currentQuestion >= (questionsArray.length - 1)) {
             clearInterval(timerInterval);
         }
     }, 1000);
 }
 
-// start quiz
+// Remove start quiz content, start time, and call question setup
 var startQuiz = document.querySelector("#start-quiz");
 
 startQuiz.addEventListener("click", function () {
@@ -72,13 +71,11 @@ startQuiz.addEventListener("click", function () {
 });
 
 
-var quizWrapper = document.querySelector("#quiz-question");
+// set up each qeuestion, loop through each questions until last question reached
 var questionEl = document.querySelector("#quiz-question");
 var choiceButtons = document.querySelector("#button-wrapper");
-
 var choicesArray = [];
 
-// set up each qeuestion
 function questionSetUp() {
     if (currentQuestion <= (questionsArray.length - 1)) {
 
@@ -95,9 +92,10 @@ function questionSetUp() {
         score = score + timer;
         allDone();
     }
-}
+};
+
+// Check if clicked answer is correct and display a feedback message 
 var answerFeedback = document.querySelector("#correct-incorrect");
-// if the button's data-index is === to answer then the its correct, else its incorrect 
 choiceButtons.addEventListener("click", function (event) {
 
     if (parseInt(event.target.getAttribute("data-index")) === questionsArray[currentQuestion].answer) {
@@ -109,7 +107,7 @@ choiceButtons.addEventListener("click", function (event) {
         var feedbackDisplay = setInterval(function () {
             answerFeedback.textContent = "";
             clearInterval(feedbackDisplay);
-        }, 1500);
+        }, 2000);
     }
     else {
         clearChoices();
@@ -120,39 +118,38 @@ choiceButtons.addEventListener("click", function (event) {
         var feedbackDisplay = setInterval(function () {
             answerFeedback.textContent = "";
             clearInterval(feedbackDisplay);
-        }, 1500);
+        }, 2000);
     }
 });
 
-
+// Clear Choices function, used to remove the buttons and question text
 function clearChoices() {
     while (choiceButtons.firstChild) {
         choiceButtons.removeChild(choiceButtons.firstChild);
     }
     choicesArray = [];
     questionEl.textContent = "";
-}
+};
 
-var submit = document.querySelector("#submit");
-var initialsInput = document.querySelector("#initials");
-
-// This function sets up the final score screen and input field where the user can 
-// input their intitials
+// Finals score screen with input field to accept user initals
 function allDone() {
     questionEl.textContent = "All Done!";
     var yourScore = document.createElement("p");
     yourScore.textContent = ("Your final score is " + score + " points!");
     questionEl.appendChild(yourScore);
-
+    
     var initialsForm = document.querySelector(".input-group");
     initialsForm.setAttribute("class", "input-group");
-}
+};
 
-// when submit is clicked, the input is saved in local storage. 
+// When submit is clicked, the input is saved in local storage. 
 var highscoreList = JSON.parse(localStorage.getItem("highscoreList"));
 if (highscoreList === null) {
     highscoreList = [];
-}
+};
+
+var submit = document.querySelector("#submit");
+var initialsInput = document.querySelector("#initials");
 
 submit.addEventListener("click", function (event) {
     event.preventDefault();
@@ -160,5 +157,5 @@ submit.addEventListener("click", function (event) {
     highscoreList.push(newItem + "-" + score);
     localStorage.setItem("highscoreList", JSON.stringify(highscoreList));
     document.location.href = "./highscores.html";
-})
+});
 

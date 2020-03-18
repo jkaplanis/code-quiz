@@ -1,5 +1,5 @@
 
-// display the highscores
+// Pull highscores from local storage and display
 var highscoreList = JSON.parse(localStorage.getItem("highscoreList"));
 
 if (highscoreList === null) {
@@ -14,8 +14,7 @@ for (var i = 0; i < highscoreList.length; i++) {
     highscoreListDisplay.appendChild(highscore);
 };
 
-// clear highscores
-
+// Clear highscores when 'Clear Highscores' button is clicked
 var clearHighscores = document.querySelector("#clear-highscores");
 clearHighscores.addEventListener("click", function () {
     localStorage.clear();
