@@ -11,6 +11,10 @@ When the quiz ends, the you can enter your initials to save hyour highscores
 Highscores will remain on the Highscores page until 'Clear Highscores' is clicked 
 The Highscores page can be reached at anytime by click 'Highscores' in the top left of the window  
 
+## Links 
+Github Repo: https://github.com/jkaplanis/code-quiz  
+Deployed Application: https://jkaplanis.github.io/code-quiz/  
+
 ## Screenshots
 ![Alt text](/assets/screenshot1.png "Start screen")
 ![Alt text](/assets/screenshot2.png "Answered question")
